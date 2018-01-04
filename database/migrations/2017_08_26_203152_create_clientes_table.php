@@ -17,12 +17,12 @@ class CreateClientesTable extends Migration
             $table->increments('id');
             $table->string('nombre');
             $table->string('apellido');
-            $table->string('cedula'); 
+            $table->string('cedula')->unique(); 
             $table->date('nacimiento');
             $table->string('email')->unique();
-            $table->integer('telefono');
+            $table->bigInteger('telefono');
             $table->integer('id_direccion')->unsigned();
-            $table->integer('id_nacionalidad')->unsigned;
+            $table->integer('id_nacionalidad')->unsigned();
             //$table->foreign('id_direccion')->references('id')->on('direccion');
             //$table->foreign('id_nacionalidad')->references('id')->on('nacionalidad');
             $table->boolean('activo')->default('1');

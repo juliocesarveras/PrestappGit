@@ -26,10 +26,10 @@ class ClienteRequest extends FormRequest
         return [
             'nombre' => 'required', 
             'apellido' => 'required', 
-            'cedula' => 'required | unique:clientes,cedula->ignore($cliente->id)',
+            'cedula' => 'required | unique:clientes,cedula',
             'nacimiento' => 'required',
             'nacionalidad' => 'required',
-            'email' => 'required | unique:clientes,email->ignore($cliente->id)',
+            'email' => 'required | unique:clientes,email',
             'telefono' => 'required',
 
          //validar campos direccion
