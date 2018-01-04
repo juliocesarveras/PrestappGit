@@ -53,14 +53,18 @@ class ReportePagosController extends Controller
 
         $calculos = [
 
-             'loop' => $prestamo->tiempo*4,
+            'loop' => $prestamo->tiempo*4,
             'porcentaje' => $prestamo->porcentaje/100,
             'interes' => $prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo,
+            'redito'=> ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*4),
+            'capital'=>$prestamo->monto/($prestamo->tiempo*4),
             'fechaorigin' => Carbon::parse($prestamo->created_at)->format('d-M-Y'),
             'pago'=>$prestamo->monto,
             'prestamo'=>$prestamo->tiempo,
-            'cuotas'=>$prestamo->created_at
+            'fechacuotas'=>$prestamo->created_at,
+            'capitalpendiente'=>$prestamo->monto
         ];
+
 
         
 //dd($calculos);

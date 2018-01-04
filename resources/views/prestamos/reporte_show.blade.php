@@ -64,17 +64,19 @@
 									<th>Capital</th>
 									<th>Interés</th>
 									<th>Cuota</th>
+									<th>Capital Pendiente</th>
 									<th>fecha de pago</th>
 								</tr>
 							</thead>
 							<tbody>
 								@for($i=0;$i<$calculo['loop'];$i++)
 								<tr>
-									<td>{{$i}}</td>
-									<td>${{ number_format($prestamo->monto,2, ',', '.') }}</td>
-									<td>${{ number_format($calculo['interes'],2,',','.') }}</td>
-									<td>${{ number_format($prestamo->monto + $calculo['interes'],2, '.', ',') }}</td>
-									<td>{{ Carbon\Carbon::parse($calculo['cuotas']->addWeeks(1))->format('d-M-y')}}</td>
+									<td>{{$i+1}}</td>
+									<td>${{ number_format($calculo['capital'],2, '.', ',') }}</td>
+									<td>${{ number_format($calculo['redito'],2,',','.') }}</td>
+									<td>${{ number_format($calculo['capital'] + $calculo['redito'],2, '.', ',') }}</td>
+									<td>{{$calculo['capitalpendiente']= $calculo['capitalpendiente']  - $calculo['capital']  }}</td>
+									<td>{{ Carbon\Carbon::parse($calculo['fechacuotas']->addWeeks(1))->format('d-M-y')}}</td>
 								</tr>
 								@endFor
 							</tbody>
