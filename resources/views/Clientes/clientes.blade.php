@@ -35,7 +35,7 @@
           <td>{{ $cliente->apellido}}</td>
           <td>{{ $cliente->cedula }}</td>
           <td>{{ $cliente->nacimiento}}</td>
-          <td> {{ link_to_route('clientes.edit','Editar',[$cliente->id],['class'=>'btn btn-success']) }}</td>
+          
         </tr>
 
         @endforeach
