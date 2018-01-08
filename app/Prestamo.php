@@ -21,5 +21,10 @@ public function FormaPago(){
 	return $this->belongsTo('App\FormaPago','id_forma_pago');
 }
 
+public function TipoPrestamo(){
+
+	return $this->belongsTo('App\TipoPrestamo','id_tipo');
+} 
+
 }
 

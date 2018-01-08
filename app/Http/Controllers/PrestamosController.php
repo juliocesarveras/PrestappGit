@@ -49,7 +49,7 @@ class PrestamosController extends Controller
         Prestamo::create($request->all());
         $cliente =$request->id_cliente;
 
-        return redirect()->route('clientes.index')->withId($cliente);
+        return redirect()->route('clientes.show',$request->id_cliente)->withMessage("El prestamo se ha creado satisfactoriamente");
 
     }
 

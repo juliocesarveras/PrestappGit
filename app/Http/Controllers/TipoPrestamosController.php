@@ -41,7 +41,7 @@ class TipoPrestamosController extends Controller
             ]);
 
         TipoPrestamo::create($request->all());
-        return back()->withMessage('Se ha creado con éxito el tipo de préstamo');
+        return back()->withMensaje('Se ha creado con éxito el tipo de préstamo');
     }
 
     /**
@@ -63,7 +63,10 @@ class TipoPrestamosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $tipoprestamo = TipoPrestamo::FindorFail($id);
+
+        //dd($tipoprestamo);
+        return view('admin.tipo_prestamo_edit')->withTiposprestamos($tipoprestamo);
     }
 
     /**
@@ -75,7 +78,11 @@ class TipoPrestamosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tipoprestamo = TipoPrestamo::find($id);
+        $tipoprestamo->update($request->all());
+        return redirect()->route('tipoPrestamo.index')->withMensaje('El tipo de prestamo ha sido actualizado correctamente');
+
+
     }
 
     /**

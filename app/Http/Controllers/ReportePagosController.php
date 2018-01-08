@@ -50,27 +50,51 @@ class ReportePagosController extends Controller
     {
         $prestamo = Prestamo::findorFail($id);
 
-
-        $calculos = [
-
-            'loop' => $prestamo->tiempo*4,
-            'porcentaje' => $prestamo->porcentaje/100,
-            'interes' => $prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo,
-            'redito'=> ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*4),
-            'capital'=>$prestamo->monto/($prestamo->tiempo*4),
-            'fechaorigin' => Carbon::parse($prestamo->created_at)->format('d-M-Y'),
-            'pago'=>$prestamo->monto,
-            'prestamo'=>$prestamo->tiempo,
-            'fechacuotas'=>$prestamo->created_at,
-            'capitalpendiente'=>$prestamo->monto
+        $variables = [
+        'porcentaje' => $prestamo->porcentaje/100,
+        'interes' => $prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo,
+        'fechaorigin' => Carbon::parse($prestamo->created_at)->format('d-M-Y'),
+        'pago'=>$prestamo->monto,
+        'prestamo'=>$prestamo->tiempo,
+        'fechacuotas'=>$prestamo->created_at,
+        'capitalpendiente'=>$prestamo->monto
         ];
-
-
         
+        //si los pagos son semanales  id_forma_pago ==1 multiplica los meses por 4
+        if($prestamo->id_forma_pago ==1){ $calculos=$this->calcula(4,$prestamo,$prestamo->id_tipo)+$variables;
+        //Si son Los pagos son quincenales id_forma_pago ==2 multiplica los meses por 2
+        }elseif($prestamo->id_forma_pago ==2){$calculos=$this->calcula(2,$prestamo,$prestamo->id_tipo)+$variables;
+        //si los pagos son Mensuales id_forma_pago ==3 multiplica los meses por 1
+        }elseif($prestamo->id_forma_pago ==3){$calculos=$this->calcula(1,$prestamo,$prestamo->id_tipo)+$variables;}
+
 //dd($calculos);
 
         return view('prestamos.reporte_show')->withPrestamo($prestamo)->withCalculo($calculos);
     }
+
+
+
+    public function calcula($factor, $prestamo,$tipoPrestamo){
+
+       $comunes =[
+       'loop' => $prestamo->tiempo*$factor,
+       'redito'=> ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),
+       ];
+
+            if($tipoPrestamo==1){//Si el tipo de prestamo es interés simple
+                $calculos = [
+                'capital'=>$prestamo->monto/($prestamo->tiempo*$factor),
+                'cuota'=>($prestamo->monto/($prestamo->tiempo*$factor)) + ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),            
+                ];
+            }elseif($tipoPrestamo==2){//si el tipo de préstamo es solo interés
+                $calculos = [
+                'capital'=>0,
+                'cuota'=>($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),    
+                ];
+            }
+
+            return $calculos+$comunes;
+        }
 
     /**
      * Show the form for editing the specified resource.
