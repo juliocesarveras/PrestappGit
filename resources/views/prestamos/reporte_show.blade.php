@@ -32,7 +32,7 @@
 									<td>${{ number_format($calculo['cuota'],2, '.', ',') }}</td>
 									<td>${{ number_format($calculo['capital'],2, '.', ',') }}</td>
 									<td>${{ number_format($calculo['redito'],2,'.',',') }}</td>
-									<td>${{number_format($calculo['capitalpendiente']= $calculo['capitalpendiente']  - $calculo['capital']),2,'.',','  }}</td>
+									<td>${{ number_format($calculo['capitalpendiente']= $calculo['capitalpendiente']  - $calculo['capital']),2,'.',','  }}</td>
 									@if($prestamo->id_forma_pago==1) 
 									<td>{{ Carbon\Carbon::parse($calculo['fechacuotas']->addWeeks(1))->format('d-M-y')}}</td>
 									@endif
@@ -43,6 +43,7 @@
 									<td>{{ Carbon\Carbon::parse($calculo['fechacuotas']->addMonths(1))->format('d-M-y')}}</td>
 									@endif
 									<td>Pendiente</td>
+									<td>{{link_to_route('pago.store','Pagar',$parameters =[$prestamo->cliente->id],['class'=>'btn btn-success'])}} </td>
 								</tr>
 								@endFor
 							</tbody>
