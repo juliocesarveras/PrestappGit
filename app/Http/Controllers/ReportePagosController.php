@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Prestamo;
+use App\Pago;
 use Carbon\Carbon;
 
 class ReportePagosController extends Controller
@@ -49,6 +50,9 @@ class ReportePagosController extends Controller
     public function show($id)
     {
         $prestamo = Prestamo::findorFail($id);
+        
+//Datos de los pagos
+        $pagos = Pago::where('id_prestamo',$id)->count();
 
         $variables = [
         'porcentaje' => $prestamo->porcentaje/100,
@@ -69,17 +73,17 @@ class ReportePagosController extends Controller
 
 //dd($calculos);
 
-        return view('prestamos.reporte_show')->withPrestamo($prestamo)->withCalculo($calculos);
+        return view('prestamos.reporte_show')->withPrestamo($prestamo)->withCalculo($calculos)->withPagos($pagos);
     }
 
 
 
     public function calcula($factor, $prestamo,$tipoPrestamo){
 
-       $comunes =[
-       'loop' => $prestamo->tiempo*$factor,
-       'redito'=> ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),
-       ];
+     $comunes =[
+     'loop' => $prestamo->tiempo*$factor,
+     'redito'=> ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),
+     ];
 
             if($tipoPrestamo==1){//Si el tipo de prestamo es interés simple
                 $calculos = [

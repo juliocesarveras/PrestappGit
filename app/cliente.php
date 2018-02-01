@@ -38,7 +38,7 @@ class Cliente extends Model
     }
 
 public function prestamos(){
-	return $this->hasMany('App\Prestamo',"id_cliente");
+	return $this->hasMany('App\Prestamo','id_cliente');
 }
 
 
@@ -46,6 +46,11 @@ public function getEdadAttribute(){
 
 		return $this->nacimiento = Carbon::createFromFormat('Y-m-d',$this->nacimiento)->diff(Carbon::now())->format('%y años');
 
+	}
+
+	public function totalPrestamos($id){
+
+		return static::where('');
 	}
 
 	//scope queries

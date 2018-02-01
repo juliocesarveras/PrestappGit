@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PagosRequest;
+use App\Prestamo;
 use App\Pago;
 
 class PagosController extends Controller
@@ -37,12 +38,19 @@ class PagosController extends Controller
      */
     public function store(Request $request)
     {
-        dd('STORE');
-        dd($request);
-        Pago::create($request->all());
+       //dd('STORE');
+       // dd($request->id);
+       // Pago::create($request->all());
+        $pago = Pago::create([
+            'id_prestamo' => $request->id,
+            'monto' => $request->cuota,
+            'capital' => $request->capital,
+            'interes' => $request->interes,
+            'pago_cuota_completa'=>'1'
 
-       // return view('prestamos.prestamo_create')
-       // return redirect()->route('prestamos.show',$request->id_cliente)->withMessage("El pago se ha efectuado satisfactoriamente");
+        ]); 
+       // return view('prestamos.reporte_show');
+        return redirect()->route('reportePago.show',$request->id)->withMessage("El pago se ha efectuado satisfactoriamente");
 
     }
 

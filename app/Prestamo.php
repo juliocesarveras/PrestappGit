@@ -27,7 +27,7 @@ public function TipoPrestamo(){
 } 
 
 public function Pago(){
-	return $this->hasMany('App\Pago');
+	return $this->hasMany('App\Pago','id_prestamo');
 }
 }
 
