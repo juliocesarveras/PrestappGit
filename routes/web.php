@@ -25,9 +25,5 @@ Route::resource('prestamo','PrestamosController',['except'=>['create']]);
 Route::resource('formaPago','FormaPagosController');
 Route::resource('tipoPrestamo','TipoPrestamosController');
 Route::resource('reportePago','ReportePagosController');
-Route::get('/pdf/view', function() {
-    $html = view('prestamos.reporte_show',$request)->render();
 
-    return PDF::load($html)->show();
-});
 
