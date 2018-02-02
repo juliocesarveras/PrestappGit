@@ -26,4 +26,5 @@ Route::resource('formaPago','FormaPagosController');
 Route::resource('tipoPrestamo','TipoPrestamosController');
 Route::resource('reportePago','ReportePagosController');
 
+});
 

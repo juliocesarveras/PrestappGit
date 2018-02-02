@@ -26,5 +26,8 @@ public function TipoPrestamo(){
 	return $this->belongsTo('App\TipoPrestamo','id_tipo');
 } 
 
+public function Pago(){
+	return $this->hasMany('App\Pago','id_prestamo');
+}
 }
 

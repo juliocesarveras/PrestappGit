@@ -50,9 +50,7 @@
 								<tr> 
 									<td>Total</td>
 									<td>
-										@if(count($cliente->prestamo) )
-										{{ $cliente->prestamo->sum('monto') }}
-										@endif
+										${{ number_format($cliente->prestamos->sum('monto'),2,'.',',') }}
 									</td>
 								</tr>
 							</tbody>

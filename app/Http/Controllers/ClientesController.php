@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cliente;
 Use App\Http\Requests\ClienteRequest;
 use App\Http\Requests\ClienteUpdateRequest;
+use App\Prestamo;
 Use App\Nacionalidad;
 use App\Pais;
 use App\Ciudad;
