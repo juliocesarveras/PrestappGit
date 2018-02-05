@@ -15,9 +15,10 @@ class PagosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function abono($id)
     {
-        dd('hola');
+       $prestamo = Prestamo::findorFail($id);
+        return view('prestamos.abono')->withPrestamo($prestamo);
     }
 
     /**
@@ -46,7 +47,8 @@ class PagosController extends Controller
             'monto' => $request->cuota,
             'capital' => $request->capital,
             'interes' => $request->interes,
-            'pago_cuota_completa'=>'1'
+            'pago_cuota_completa'=>'1',
+            'hizo_abono'=>'0'
 
         ]); 
        // return view('prestamos.reporte_show');

@@ -51,9 +51,6 @@ class ReportePagosController extends Controller
     {
         $prestamo = Prestamo::findorFail($id);
         
-//Datos de los pagos
-        $pagos = Pago::where('id_prestamo',$id)->count();
-
         $variables = [
         'porcentaje' => $prestamo->porcentaje/100,
         'interes' => $prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo,
@@ -73,7 +70,7 @@ class ReportePagosController extends Controller
 
 //dd($calculos);
 
-        return view('prestamos.reporte_show')->withPrestamo($prestamo)->withCalculo($calculos)->withPagos($pagos);
+        return view('prestamos.reporte_show')->withPrestamo($prestamo)->withCalculo($calculos);
     }
 
 
