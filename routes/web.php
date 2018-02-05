@@ -25,6 +25,5 @@ Route::resource('prestamo','PrestamosController',['except'=>['create']]);
 Route::resource('formaPago','FormaPagosController');
 Route::resource('tipoPrestamo','TipoPrestamosController');
 Route::resource('reportePago','ReportePagosController');
-
-});
+Route::resource('pago','PagosController');
 

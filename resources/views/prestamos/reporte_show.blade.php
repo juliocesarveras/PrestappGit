@@ -13,9 +13,48 @@
 		<div class="col-md-8">
 			<!--tabla de reporte de pagos-->
 			<div class="card">
-				<div class="card-header">Detalles de cuotas pendientes de pago para el prestamo Numero {{ sprintf('%04d',$prestamo->id) }} de {{ $prestamo->cliente->nombre }} {{ $prestamo->cliente->apellido }}</div>
-				
+				<div class="card-header">Detalles de cuotas pendientes de pago para el prestamo Numero {{ sprintf('%04d',$prestamo->id) }} de {{ $prestamo->cliente->nombre }} {{ $prestamo->cliente->apellido }}</div>				
+
+				<div clas="col-md-8"><!--Datos de pagos-->
+					<div class="card text-center " style="background-color:#EBF0F3">
+						<div class="card-body" >
+							<div class="card-columns">
+								<div class="card w-30">										
+									<div class="card-body">
+										<h5 class="card-title">{{$prestamo->pago->count()}}</h5>
+										<small class="text-muted">Total de Pagos Realizados</small></div>
+									</div>
+
+
+									<div class="card w-40">
+										<div class="card-body">
+											<h5 class="card-title">${{$prestamo->pago->sum('capital')}}</h5>
+											<small class="text-muted">Total Capital Pagado</small>
+										</div>
+									</div>
+
+									<div class="card w-40">
+										<div class="card-body">
+											<h5 class="card-title">${{$prestamo->pago->sum('interes')}}</h5>
+											<small class="text-muted">Total Interés Pagado</small>
+										</div>
+									</div>
+
+									<div class="card w-40">
+										<div class="card-body">
+											<h5 class="card-title">${{$prestamo->pago->sum('monto')}}</h5>
+											<small class="text-muted">Total Pagado</small>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!--Fin datos de pagos-->
+
+
 				@if ($calculo['loop'] - $prestamo->pago->count() > 0 ) <!--Si tiene cuotas pendientes-->
+				
 				<div class="card-body">
 					<div class="table-responsive">
 						<table class="table table-striped table-hover">
@@ -65,50 +104,12 @@
 							</div>
 						</div><!--Fin del Div Table-->
 						@else <!--Si no tiene cuotas pendientes-->
-
-						<div clas="col-md-8">
-							<div class="card text-center" style="background-color:#EBF0F3">
-								<h5 class="card-title">Este préstamo no tiene cuotas pendientes</h5>
-								<div class="card-body" >
-									<div class="row">
-										<div class="card w-30">										
-											<div class="card-body">
-												<h5 class="card-title">{{$prestamo->pago->count()}}</h5>
-												<small class="text-muted">Total de Pagos Realizados</small></div>
-											</div>
-											
-
-											<div class="card w-40">
-												<div class="card-body">
-													<h5 class="card-title">${{$prestamo->pago->sum('capital')}}</h5>
-													<small class="text-muted">Total Capital Pagado</small>
-												</div>
-											</div>
-
-											<div class="card w-40">
-												<div class="card-body">
-													<h5 class="card-title">${{$prestamo->pago->sum('interes')}}</h5>
-													<small class="text-muted">Total Interés Pagado</small>
-												</div>
-											</div>
-
-											<div class="card w-40">
-												<div class="card-body">
-													<h5 class="card-title">${{$prestamo->pago->sum('monto')}}</h5>
-													<small class="text-muted">Total Pagado</small>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						</div>
-
+						<h5 class="card-title">Este réstamo no tiene cuotas pendientes</h5>
 						@endif <!--Fin del if-->
 					</div><!--Fin del CARD BODY-->
+
 					<div class="col-md-4">
-						<div class="card ">
+						<div class="card card-outline-primary">
 							<div class="card-header">Datos del Préstamo</div>
 							<div class="card-body">
 								<div class="table-responsive">
@@ -142,21 +143,6 @@
 												<td><dt>Interés a ganar en este préstamo</dt></td>
 												<td>${{number_format($calculo['interes'],2, '.', ',') }}</td>
 											</tr>
-
-											<tr>
-												<td><dt>Total de Cuotas pagadas a este prestamo</dt></td>
-												<td>{{ $prestamo->pago->count() }}</td>
-											</tr>
-
-											<tr>
-												<td><dt>Total Capital Pagado a este préstamo</dt></td>
-												<td>$ {{ number_format($prestamo->pago->sum('capital'),2,'.',',') }}</td>
-											</tr>
-
-											<tr>
-												<td><dt>Total Interes Pagado a este préstamo</dt></td>
-												<td>$ {{ number_format($prestamo->pago->sum('interes'),2,'.',',') }}</td>
-											</tr>
 											<tr>
 												<td><dt>Fecha Original:</dt></td>
 												<td>{{ $calculo['fechaorigin'] }}</td>
@@ -165,6 +151,30 @@
 											<tr>
 												<td><dt>Monto Original :</dt></td> 
 												<td>${{ number_format($prestamo->monto,2, '.', ',') }}</td>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="card-header card-outline-primary">Datos de Pagos</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-striped ">
+											<tbody>
+												<tr>
+													<td><dt>Total de Cuotas pagadas</dt></td>
+													<td>{{ $prestamo->pago->count() }}</td>
+												</tr>
+
+												<tr>
+													<td><dt>Total Capital Pagado</dt></td>
+													<td>$ {{ number_format($prestamo->pago->sum('capital'),2,'.',',') }}</td>
+												</tr>
+
+												<tr>
+													<td><dt>Total Interes Pagado </dt></td>
+													<td>$ {{ number_format($prestamo->pago->sum('interes'),2,'.',',') }}</td>
+												</tr>
+
 											</tr>
 										</tbody>
 									</table>
