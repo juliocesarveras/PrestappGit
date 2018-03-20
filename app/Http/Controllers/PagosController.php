@@ -11,15 +11,6 @@ use App\Pago;
 class PagosController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function abono($id)
-    {
-       $prestamo = Prestamo::findorFail($id);
-        return view('prestamos.abono')->withPrestamo($prestamo);
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -47,8 +38,7 @@ class PagosController extends Controller
             'monto' => $request->cuota,
             'capital' => $request->capital,
             'interes' => $request->interes,
-            'pago_cuota_completa'=>'1',
-            'hizo_abono'=>'0'
+            'pago_cuota_completa'=>'1'
 
         ]); 
        // return view('prestamos.reporte_show');

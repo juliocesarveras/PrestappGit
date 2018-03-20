@@ -58,7 +58,7 @@ class ReportePagosController extends Controller
         'pago'=>$prestamo->monto,
         'prestamo'=>$prestamo->tiempo,
         'fechacuotas'=>$prestamo->created_at,
-        'capitalpendiente'=>$prestamo->monto
+        'capitalpendiente'=>$prestamo->monto - $prestamo->abono->sum('monto')
         ];
         
         //si los pagos son semanales  id_forma_pago ==1 multiplica los meses por 4
@@ -79,7 +79,7 @@ class ReportePagosController extends Controller
 
      $comunes =[
      'loop' => $prestamo->tiempo*$factor,
-     'redito'=> ($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),
+     'redito'=> (($prestamo->monto - $prestamo->abono->sum('monto'))*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),
      ];
 
             if($tipoPrestamo==1){//Si el tipo de prestamo es interés simple
@@ -90,7 +90,7 @@ class ReportePagosController extends Controller
             }elseif($tipoPrestamo==2){//si el tipo de préstamo es solo interés
                 $calculos = [
                 'capital'=>0,
-                'cuota'=>($prestamo->monto*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),    
+                'cuota'=>(($prestamo->monto - $prestamo->abono->sum('monto'))*($prestamo->porcentaje/100)*$prestamo->tiempo)/($prestamo->tiempo*$factor),    
                 ];
             }
 

@@ -21,7 +21,6 @@
           <th>Nombre</th>
           <th>Apellido</th>
           <th>Cédula</th>
-          <th>Nacimiento</th>
           <ht>Action</ht>
         </tr>
       </thead>
@@ -34,7 +33,6 @@
           <td><a href="{{ route('clientes.show',$cliente->id) }}">{{ $cliente->nombre }}</a></td>
           <td>{{ $cliente->apellido}}</td>
           <td>{{ $cliente->cedula }}</td>
-          <td>{{ $cliente->nacimiento}}</td>
           
         </tr>
 

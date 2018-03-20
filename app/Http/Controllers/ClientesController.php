@@ -22,7 +22,11 @@ class ClientesController extends Controller
      */
     public function index()
     {
-       $cliente= Cliente::all();
+        $clientes= Cliente::all();
+
+        $search = \Request::get('search'); 
+
+        $cliente = cliente::where('nombre', 'like', '%'.$search.'%')->orWhere('apellido','like', '%'.$search.'%')->orderBy('nombre')->paginate(20);
        return view('Clientes.clientes')->withClientes($cliente);
    }
 

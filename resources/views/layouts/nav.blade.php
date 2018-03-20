@@ -44,10 +44,16 @@
         <a class="nav-link" href="#">Help</a>
       </li>
     </ul>
-    <form class="form-inline mt-2 mt-md-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    
+{{ Form::open(['method'=>'GET','url'=>'clientes','class'=>'navbar-form navbar-left','role'=>'search'])  }}
+
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" name="search" placeholder="Search...">
+                <span class="input-group-btn">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+{!! Form::close() !!}
+
+
   </div>
 </nav>
 

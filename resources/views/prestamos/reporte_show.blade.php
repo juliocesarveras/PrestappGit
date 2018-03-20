@@ -49,18 +49,33 @@
 
 							<div class="card w-40">
 								<div class="card-body">
-									<h5 class="card-title">$  {{number_format(($prestamo->monto) - ($prestamo->pago->sum('capital'))),',','.'}}</h5>
-									<small class="text-muted">Capital Pendinte</small>
+									<h5 class="card-title">$  {{number_format(($calculo['capitalpendiente']) - ($prestamo->pago->sum('capital'))),',','.'}}</h5>
+									<small class="text-muted">Capital Pendiente</small>
 								</div>
 							</div>
-						</div>
+				@if($prestamo->id_tipo!=2) <!--si el tipo de préstamo es solo interés-->
+		</div>
+		@endif
 
-						{{Form::model($prestamo->id,array('action'=>['PagosController@abono', $prestamo->id],'method'=>'POST'))}}
+@if($prestamo->id_tipo==2) <!--si el tipo de préstamo es solo interés-->
+
+							<div class="card w-40">
+								<div class="card-body">
+									<h5 class="card-title">$  {{number_format(($prestamo->abono->sum('monto')) ),',','.'}}</h5>
+									<small class="text-muted">Total de Abonos Realizados</small>
+								</div>
+							</div>
+		</div>
+
+
+						{{Form::model($prestamo->id,array('action'=>['AbonoController@show', $prestamo->id],'method'=>'POST'))}}
 						{{ Form::hidden('id', $prestamo->id) }}
 
 						{{Form::button('Abono a Capital',['class'=>'btn btn-success','type'=>'submit'])}}
 
 						{{Form::close()}}
+
+						@endif
 					</div>
 				</div>
 			</div>
@@ -112,7 +127,7 @@
 										</tr>
 										{{Form::close()}}
 										@endFor									
-									</tbody><!--Fin de l body de la table-->
+									</tbody><!--Fin del body de la table-->
 								</table><!--Fin de la Tabla-->									
 							</div><!--Fin del Div Table responsive-->								
 						</div><!--Fin del CARD BODY-->
