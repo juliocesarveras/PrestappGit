@@ -13,8 +13,10 @@
 
 use App\Cliente;
 
+Auth::routes();
 
-Route::get('/','ClientesController@index');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('clientes','ClientesController@index');
 Route::resource('clientes','ClientesController');
 Route::resource('pais','PaisesController');
 Route::resource('nacionalidad','NacionalidadController');
