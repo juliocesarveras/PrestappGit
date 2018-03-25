@@ -8,12 +8,20 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<<<<<<< HEAD
     <title>{{ config('app.name', 'Laravel') }}</title>
+=======
+    <title>{{ config('app.name', 'Prestapp') }}</title>
+>>>>>>> f5ec9870aaecdc4582caa14437238dfb4cedc49e
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+<<<<<<< HEAD
 <body>
+=======
+<body style="background-image: url('images/big-desktop-wallpaper-2.jpg');">
+>>>>>>> f5ec9870aaecdc4582caa14437238dfb4cedc49e
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -29,7 +37,11 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
+<<<<<<< HEAD
                         {{ config('app.name', 'Laravel') }}
+=======
+                        {{ config('', 'Prestapp') }}
+>>>>>>> f5ec9870aaecdc4582caa14437238dfb4cedc49e
                     </a>
                 </div>
 
@@ -43,8 +55,13 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
+<<<<<<< HEAD
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
+=======
+                            <li><a href="{{ route('login') }}">Entrar</a></li>
+                            <li><a href="{{ route('register') }}">Registrarse</a></li>
+>>>>>>> f5ec9870aaecdc4582caa14437238dfb4cedc49e
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -7,7 +7,11 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
 
+<<<<<<< HEAD
                 <div class="panel-body">
+=======
+                <div class="panel-body" >
+>>>>>>> f5ec9870aaecdc4582caa14437238dfb4cedc49e
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
