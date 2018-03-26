@@ -15,7 +15,6 @@ use App\Cliente;
 
 Auth::routes();
 
-<<<<<<< HEAD
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
@@ -24,14 +23,12 @@ Route::middleware(['auth'])->group(function () {
 		Route::resource('pais','PaisesController');
 		Route::resource('nacionalidad','NacionalidadController');
 		Route::resource('ciudad','CiudadesController');
-=======
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('clientes','ClientesController@index');
 Route::resource('clientes','ClientesController');
 Route::resource('pais','PaisesController');
 Route::resource('nacionalidad','NacionalidadController');
 Route::resource('ciudad','CiudadesController');
->>>>>>> f5ec9870aaecdc4582caa14437238dfb4cedc49e
 Route::get('prestamo/{id}', ['as' => 'prestamo.create', 'uses' => 'PrestamosController@create']);//para poder recibir el id en el create() 
 Route::resource('prestamo','PrestamosController',['except'=>['create']]);
 
